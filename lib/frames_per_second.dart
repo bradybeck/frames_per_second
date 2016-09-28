@@ -3,7 +3,7 @@ import 'dart:html';
 
 export 'src/frames_per_second_base.dart';
 
-/// Calculates the pages frames per second. Provides a stream so a consume can stream the changes.
+/// Calculates the pages frames per second. Provides a stream so a consumer can stream the changes.
 class FramesPerSecond {
   int _currentFps;
   StreamController _fpsController;
@@ -14,10 +14,13 @@ class FramesPerSecond {
   int _frameCount;
   int _time;
 
+  Element _fpsContainer;
+  Element _totalItems;
+
   int get totalItems => document.querySelectorAll('*').length;
 
   /// Creates a class and starts recording by default.
-  FramesPerSecond() {
+  FramesPerSecond({addRibbon: false}) {
     _currentFps = 0;
     _frameCount = 0;
     _timeLastSecond = 0;
@@ -25,9 +28,44 @@ class FramesPerSecond {
     _active = true;
     fpsUpdateStream = _fpsController.stream;
     _loop();
+
+    if (addRibbon) {
+      addRibbon();
+    }
   }
 
   int get currentFps => _currentFps;
+
+  // adding a ribbon to the top for debugging.
+  addRibbon() {
+    DivElement div = new DivElement();
+    div.id = 'FPSDisplay';
+    div.className = 'fpsDisplay';
+    div.style.backgroundColor = 'black';
+    div.style.color = 'white';
+    div.style.fontFamily = 'Helvetica';
+    div.style.padding = '0.5em';
+    div.style.opacity = '0.5';
+    div.style.position = 'relative';
+    div.style.top = '0';
+    div.style.right = '0';
+    div.style.left = '0';
+    div.style.zIndex = '1000';
+
+    _totalItems = new SpanElement();
+    _totalItems.className = 'fpsDisplayLabel';
+    _totalItems.style.marginLeft = '0.5em';
+    _totalItems = new DivElement()..text = 'total elements: ';
+
+    _fpsContainer = new SpanElement();
+    _fpsContainer.className = 'fpsDisplayLabel';
+    _fpsContainer.style.marginLeft = '0.5em';
+
+    div.children.add(_fpsContainer);
+    div.children.add(_totalItems);
+
+    document.body.append(div);
+  }
 
   /// Start recording frames per second.
   start() {
@@ -53,6 +91,15 @@ class FramesPerSecond {
 
       // let the consumer know of the change.
       _fpsController.add(null);
+
+      if (_totalItems != null) {
+        _totalItems.children = [
+          new SpanElement()..text = 'total elements: ${totalItems.toString()}'
+        ];
+        _fpsContainer.children = [
+          new SpanElement()..text = 'fps: ${_currentFps.toString()}'
+        ];
+      }
     }
   }
 

@@ -10,8 +10,12 @@ main() {
   document.body.append(fpsDiv);
   document.body.append(totalElements);
 
-  fps.fpsUpdateStream.listen((_) {
+  var listener = fps.fpsUpdateStream.listen((_) {
     fpsDiv.text = fps.currentFps.toString();
     totalElements.text = fps.totalItems.toString();
+  });
+
+  window.onBeforeUnload.listen((_) {
+    listener.cancel();
   });
 }
