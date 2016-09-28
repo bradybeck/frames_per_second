@@ -1,5 +1,5 @@
 name: frames_per_second
-description: A starting point for Dart libraries or applications.
+description: Dart library to calculate and stream frames per second.
 version: 0.0.1
 author: Brady Becker <bradybeck@gmail.com>
 homepage: http://github.com/bradybeck/frames_per_second
