@@ -1,4 +1,4 @@
-# frames_per_second
+# Frames Per Second [![Build Status](https://travis-ci.org/bradybeck/frames_per_second.svg?branch=master)](https://travis-ci.org/bradybeck/frames_per_second)
 
 A lightweight library to calculate frames per second.
 
