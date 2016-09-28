@@ -1,0 +1,16 @@
+name: frames_per_second
+description: A starting point for Dart libraries or applications.
+version: 0.0.1
+author: Brady Becker <bradybeck@gmail.com>
+homepage: http://github.com/bradybeck/frames_per_second
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dev_dependencies:
+    analyzer: ^0.27.3
+    coverage: ^0.7.2
+    dart_dev: ^1.1.1
+    dart_style: ^0.2.4
+    dartdoc: ">=0.8.0 <0.10.0"
+    test: ^0.12.4
