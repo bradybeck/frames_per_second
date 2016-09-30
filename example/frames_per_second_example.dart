@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:frames_per_second/frames_per_second.dart';
 
 main() {
-  FramesPerSecond fps = new FramesPerSecond();
+  FramesPerSecond fps = new FramesPerSecond(addRibbon: true);
 
   DivElement fpsDiv = new DivElement();
   DivElement totalElements = new DivElement();

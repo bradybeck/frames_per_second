@@ -30,7 +30,7 @@ class FramesPerSecond {
     _loop();
 
     if (addRibbon) {
-      addRibbon();
+      this.addRibbon();
     }
   }
 
@@ -52,19 +52,20 @@ class FramesPerSecond {
     div.style.left = '0';
     div.style.zIndex = '1000';
 
+    DivElement elementContainer = new DivElement();
+    elementContainer.style.padding = '5px';
+
     _totalItems = new SpanElement();
-    _totalItems.className = 'fpsDisplayLabel';
-    _totalItems.style.marginLeft = '0.5em';
-    _totalItems = new DivElement()..text = 'total elements: ';
+    _totalItems = new DivElement()..text = 'Loading...';
 
     _fpsContainer = new SpanElement();
-    _fpsContainer.className = 'fpsDisplayLabel';
-    _fpsContainer.style.marginLeft = '0.5em';
 
-    div.children.add(_fpsContainer);
-    div.children.add(_totalItems);
+    elementContainer.children.add(_fpsContainer);
+    elementContainer.children.add(_totalItems);
 
-    document.body.append(div);
+    div.children.add(elementContainer);
+
+    document.body.children.insert(0, div);
   }
 
   /// Start recording frames per second.
